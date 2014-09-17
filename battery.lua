@@ -10,7 +10,7 @@ local beautiful = require("beautiful")
 function batteryInfo(adapter, textwidget, timeout)
   local batterywidget_timer = timer({timeout = timeout})
 
-  batterywidget_timer:connect_signal("timeout", function()
+  function update()
     local battery, icon, percent
     local fh = io.open("/sys/class/power_supply/"..adapter.."/present", "r")
 
@@ -52,7 +52,9 @@ function batteryInfo(adapter, textwidget, timeout)
     end
 
     textwidget:set_text(" "..icon..battery..percent.." ")
-  end)
+  end
 
+  batterywidget_timer:connect_signal("timeout", update)
   batterywidget_timer:start()
+  update()
 end
