@@ -34,6 +34,7 @@ function batteryInfo(adapter, textwidget, timeout)
       if sta:match("Charging") then
         icon = "⚡"
         percent = "%"
+        color = "green"
       elseif sta:match("Discharging") then
         icon = ""
         percent = "%"
@@ -52,7 +53,7 @@ function batteryInfo(adapter, textwidget, timeout)
           })
         end
       else -- This matches "Uknown" state too
-        icon = "?"
+        icon = ""
         percent = "%"
       end
     end
