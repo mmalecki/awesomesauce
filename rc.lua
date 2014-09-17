@@ -185,12 +185,8 @@ for s = 1, screen.count() do
     batterywidget0 = wibox.widget.textbox()
     batterywidget1 = wibox.widget.textbox()
 
-    batterywidget_timer = timer({timeout = 10})
-    batterywidget_timer:connect_signal("timeout", function()
-      batterywidget0:set_text(batteryInfo("BAT0"))
-      batterywidget1:set_text(batteryInfo("BAT1"))
-    end)
-    batterywidget_timer:start()
+    batteryInfo("BAT0", batterywidget0, 10)
+    batteryInfo("BAT1", batterywidget1, 10)
 
     -- Widgets that are aligned to the left
     local left_layout = wibox.layout.fixed.horizontal()

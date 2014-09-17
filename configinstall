@@ -1,0 +1,4 @@
+#!/bin/bash
+pluginpath="$(dirname "$(readlink -f $0)")"
+rm -rvf "$HOME/.config/awesome"
+ln -svf $pluginpath "$HOME/.config/awesome"
