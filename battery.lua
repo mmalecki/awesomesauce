@@ -12,6 +12,7 @@ function batteryInfo(adapter, textwidget, timeout)
 
   function update()
     local battery, icon, percent
+    local color = "white"
     local fh = io.open("/sys/class/power_supply/"..adapter.."/present", "r")
 
     if fh == nil then
@@ -36,10 +37,15 @@ function batteryInfo(adapter, textwidget, timeout)
       elseif sta:match("Discharging") then
         icon = ""
         percent = "%"
+
         if tonumber(battery) < 15 then
+          color = "red"
+        end
+
+        if tonumber(battery) < 10 then
           naughty.notify({ title    = "Battery Warning"
                  , text     = "Battery low!".."  "..battery..percent.."  ".."left!"
-                 , timeout  = 5
+                 , timeout  = timeout
                  , position = "top_right"
                  , fg       = beautiful.fg_focus
                  , bg       = beautiful.bg_focus
@@ -51,7 +57,7 @@ function batteryInfo(adapter, textwidget, timeout)
       end
     end
 
-    textwidget:set_text(" "..icon..battery..percent.." ")
+    textwidget:set_markup("<span color='"..color.."'>"..icon..battery..percent.." </span>")
   end
 
   batterywidget_timer:connect_signal("timeout", update)
