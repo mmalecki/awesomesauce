@@ -297,7 +297,7 @@ globalkeys = awful.util.table.join(
                   function (s)
                       out = awful.util.pread("node -p \"" .. s:gsub("\"", "\\\"") .. "\"")
                       naughty.notify({ title = "JavaScript result",
-                                       text = out,
+                                       text = out:gsub("\n$", ""),
                                        preset = naughty.config.presets.normal })
                   end,
                   nil,
