@@ -290,6 +290,19 @@ globalkeys = awful.util.table.join(
                   nil,
                   awful.util.getdir("cache") .. "/history_pass")
               end),
+    awful.key({ modkey }, "\\",
+              function ()
+                  awful.prompt.run({ prompt = "Run JavaScript code: " },
+                  mypromptbox[mouse.screen].widget,
+                  function (s)
+                      out = awful.util.pread("node -p \"" .. s:gsub("\"", "\\\"") .. "\"")
+                      naughty.notify({ title = "JavaScript result",
+                                       text = out,
+                                       preset = naughty.config.presets.normal })
+                  end,
+                  nil,
+                  awful.util.getdir("cache") .. "/history_js_eval")
+              end),
     -- Lock
     awful.key({ modkey, "Shift" }, "z", function () awful.util.spawn("lock") end),
     -- Suspend
