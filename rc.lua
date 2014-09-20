@@ -295,7 +295,7 @@ globalkeys = awful.util.table.join(
                   awful.prompt.run({ prompt = "Run JavaScript code: " },
                   mypromptbox[mouse.screen].widget,
                   function (s)
-                      out = awful.util.pread("node -p \"" .. s:gsub("\"", "\\\"") .. "\"")
+                      out = awful.util.pread("node -p \"" .. s:gsub("\"", "\\\"") .. "\" 2>&1")
                       naughty.notify({ title = "JavaScript result",
                                        text = out:gsub("\n$", ""),
                                        preset = naughty.config.presets.normal })
