@@ -58,7 +58,7 @@ function batteryInfo(adapter, textwidget, timeout)
       end
     end
 
-    textwidget:set_markup("<span color='"..color.."'>"..icon..battery..percent.." </span>")
+    textwidget:set_markup("<span color='"..color.."'>"..icon..battery..percent.."</span>")
   end
 
   batterywidget_timer:connect_signal("timeout", update)
