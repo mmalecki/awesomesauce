@@ -312,9 +312,7 @@ globalkeys = awful.util.table.join(
     -- Lock
     awful.key({ modkey, "Shift" }, "z", function () awful.util.spawn("lock") end),
     -- Suspend
-    awful.key({ modkey, "Shift" }, "s", function () awful.util.spawn("systemctl suspend") end),
-    -- Lock and suspend
-    awful.key({ modkey, "Shift" }, "x", function () awful.util.spawn("lock-and-suspend") end)
+    awful.key({ modkey, "Shift" }, "s", function () awful.util.spawn("systemctl suspend") end)
 )
 
 clientkeys = awful.util.table.join(
