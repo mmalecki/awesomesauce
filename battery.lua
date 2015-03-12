@@ -42,16 +42,6 @@ function batteryInfo(adapter, textwidget, timeout)
         if tonumber(battery) < 15 then
           color = "red"
         end
-
-        if tonumber(battery) < 10 then
-          naughty.notify({ title    = "Battery Warning"
-                 , text     = "Battery low!".."  "..battery..percent.."  ".."left!"
-                 , timeout  = timeout
-                 , position = "top_right"
-                 , fg       = beautiful.fg_focus
-                 , bg       = beautiful.bg_focus
-          })
-        end
       else -- This matches "Uknown" state too
         icon = ""
         percent = "%"
