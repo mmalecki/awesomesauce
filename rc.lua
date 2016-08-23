@@ -57,18 +57,18 @@ modkey = "Mod4"
 -- Table of layouts to cover with awful.layout.inc, order matters.
 local layouts =
 {
-    awful.layout.suit.floating,
+    awful.layout.suit.fair,
+    awful.layout.suit.fair.horizontal,
     awful.layout.suit.tile,
     awful.layout.suit.tile.left,
     awful.layout.suit.tile.bottom,
     awful.layout.suit.tile.top,
-    awful.layout.suit.fair,
-    awful.layout.suit.fair.horizontal,
     awful.layout.suit.spiral,
     awful.layout.suit.spiral.dwindle,
     awful.layout.suit.max,
     awful.layout.suit.max.fullscreen,
-    awful.layout.suit.magnifier
+    awful.layout.suit.magnifier,
+    awful.layout.suit.floating,
 }
 -- }}}
 
@@ -296,6 +296,15 @@ globalkeys = awful.util.table.join(
                   nil,
                   awful.util.getdir("cache") .. "/history_pass")
               end),
+    -- Open a npm package page in a browser
+    awful.key({ modkey, "Shift" }, "n",
+              function ()
+                  awful.prompt.run({ prompt = "Open a npm package page: " },
+                  mypromptbox[mouse.screen].widget,
+                  function (s) awful.util.spawn("xdg-open https://www.npmjs.com/package/" .. s) end,
+                  nil,
+                  awful.util.getdir("cache") .. "/history_npm_package_page")
+               end),
     awful.key({ modkey }, "\\",
               function ()
                   awful.prompt.run({ prompt = "Run JavaScript code: " },
