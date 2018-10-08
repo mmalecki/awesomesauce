@@ -53,6 +53,8 @@ editor_cmd = terminal .. " -e " .. editor
 -- However, you can use another modifier like Mod1, but it may interact with others.
 modkey = "Mod4"
 
+browser = os.getenv("BROWSER") or "xdg-open"
+
 -- Table of layouts to cover with awful.layout.inc, order matters.
 local layouts =
 {
@@ -309,6 +311,7 @@ globalkeys = awful.util.table.join(
                   nil,
                   awful.util.getdir("cache") .. "/history_js_eval")
               end),
+    awful.key({ modkey, "Control" }, "c", function () awful.util.spawn(browser) end),
     -- Lock
     awful.key({ modkey, "Shift" }, "z", function () awful.util.spawn("lock") end),
     -- Suspend
