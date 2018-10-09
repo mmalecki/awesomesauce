@@ -387,16 +387,26 @@ globalkeys = gears.table.join(
                end),
     awful.key({ modkey }, "\\",
               function ()
-                  awful.prompt.run({ prompt = "Run JavaScript code: " },
-                  mypromptbox[mouse.screen].widget,
-                  function (s)
-                      out = awful.util.pread("node -p \"" .. s:gsub("\"", "\\\"") .. "\" 2>&1")
-                      naughty.notify({ title = "JavaScript result",
-                                       text = out:gsub("\n$", ""),
-                                       preset = naughty.config.presets.normal })
-                  end,
-                  nil,
-                  awful.util.getdir("cache") .. "/history_js_eval")
+                  awful.prompt.run {
+                    prompt = "Run JavaScript code: ",
+                    textbox = awful.screen.focused().mypromptbox.widget,
+                    history_path = awful.util.getdir("cache") .. "/history_js_eval",
+                    exe_callback = function (s)
+                        out = awful.util.pread("node -p \"" .. s:gsub("\"", "\\\"") .. "\" 2>&1")
+                        local function on_output (line)
+                            naughty.notify({
+                              title = s,
+                              text = line,
+                              preset = naughty.config.presets.normal
+                            })
+                        end
+
+                        awful.spawn.with_line_callback("bash -c 'node -p \"" .. s:gsub("\"", "\\\"") .. "\" 2>&1'", {
+                           stdout = on_output,
+                           stderr = on_output
+                        })
+                    end,
+                  }
               end),
     awful.key({ modkey, "Control" }, "c", function () awful.util.spawn(browser) end),
     -- Lock
