@@ -29,6 +29,12 @@ function batteryInfo(adapter, textwidget, timeout)
       fcur:close()
       fcap:close()
       fsta:close()
+
+      if cap == nil then
+        textwidget:set_markup("<span color='red'>?</span>")
+        return
+      end
+
       battery = math.floor(cur * 100 / cap)
     
       if sta:match("Charging") then
