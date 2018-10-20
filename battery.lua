@@ -48,6 +48,7 @@ function batteryInfo(adapter, textwidget, timeout)
       end
     end
 
+    fh:close()
     textwidget:set_markup("<span color='"..color.."'>"..icon..battery..percent.."</span>")
   end
 
