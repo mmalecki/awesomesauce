@@ -3,3 +3,6 @@ pluginpath="$(dirname "$(readlink -f $0)")"
 mkdir -pv "$HOME/.config"
 rm -rvf "$HOME/.config/awesome"
 ln -svf $pluginpath "$HOME/.config/awesome"
+ln -svf $pluginpath/xinitrc "$HOME/.xinitrc"
+
+apt-get install -y awesome xinit
