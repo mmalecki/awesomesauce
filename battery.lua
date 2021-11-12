@@ -13,16 +13,17 @@ function batteryInfo(adapter, textwidget, timeout)
   function update()
     local battery, icon, percent
     local color = "white"
-    local fh = io.open("/sys/class/power_supply/"..adapter.."/present", "r")
+    local base = "/sys/class/power_supply/"..adapter
+    local fh = io.open(base.."/present", "r")
 
     if fh == nil then
       battery = "A/C"
       icon = ""
       percent = ""
     else
-      local fcur = io.open("/sys/class/power_supply/"..adapter.."/energy_now")  
-      local fcap = io.open("/sys/class/power_supply/"..adapter.."/energy_full")
-      local fsta = io.open("/sys/class/power_supply/"..adapter.."/status")
+      local fcur = io.open(base.."/energy_now") or io.open(base.."/charge_now")
+      local fcap = io.open(base.."/energy_full") or io.open(base.."/charge_full")
+      local fsta = io.open(base.."/status")
       local cur = fcur:read()
       local cap = fcap:read()
       local sta = fsta:read()
