@@ -5,4 +5,4 @@ rm -rvf "$HOME/.config/awesome"
 ln -svf $pluginpath "$HOME/.config/awesome"
 ln -svf $pluginpath/xinitrc "$HOME/.xinitrc"
 
-sudo apt-get install -y awesome xinit
+sudo apt-get install -y awesome xinit terminator gsettings-desktop-schemas pinentry-gtk2 xbacklight
