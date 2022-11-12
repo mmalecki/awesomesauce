@@ -223,9 +223,7 @@ awful.screen.connect_for_each_screen(function(s)
 
     -- Create battery widgets
     batterywidget0 = wibox.widget.textbox()
-    batterywidget1 = wibox.widget.textbox()
-    batteryInfo("BAT0", batterywidget0, 10)
-    batteryInfo("BAT1", batterywidget1, 10)
+    batteryInfo("BAT1", batterywidget0, 10)
 
     -- Add widgets to the wibox
     s.mywibox:setup {
@@ -241,7 +239,6 @@ awful.screen.connect_for_each_screen(function(s)
             layout = wibox.layout.fixed.horizontal,
             wibox.widget.systray(),
             wibox.layout.margin(batterywidget0, 2, 2, 0, 0),
-            wibox.layout.margin(batterywidget1, 2, 2, 0, 0),
             mytextclock,
             s.mylayoutbox,
         },
